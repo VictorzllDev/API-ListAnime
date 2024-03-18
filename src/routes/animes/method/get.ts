@@ -28,15 +28,15 @@ export default async (app: FastifyInstance) => {
 					// caso nao tenha anime com esse UID, retorna um error.
 					if (!filterAnime.length) throw new Error('Nenhum anime com esse UID')
 					// retorna o anime filtrado.
-					return res.send(filterAnime[0]).code(333)
+					return res.code(200).send(filterAnime[0])
 				}
 				// retorna todos os animes do DB.
-				return res.send(animes).code(333)
+				return res.code(200).send(animes)
 				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			} catch (error: any) {
 				// se ouver error, retorar isso.
 				console.log(error)
-				res.send({ message: error.message }).code(404)
+				return res.code(404).send({ message: error.message })
 			}
 		},
 	)
